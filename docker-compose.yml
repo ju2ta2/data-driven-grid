@@ -1,0 +1,62 @@
+version: '3'
+
+services:
+  selenium-hub:
+    image:  selenium/hub:4.16.1
+    container_name: selenium-hub
+    privileged: true
+    ports:
+      - '4445-4447:4442-4444'
+    environment:
+      - GRID_TIMEOUT=240000
+      - GRID_BROWSER_TIMEOUT=240000
+    networks:
+      - grid_internal
+
+  selenium-chrome-node:
+    image: selenium/node-chrome:120.0
+    privileged: true
+    depends_on:
+      - selenium-hub
+    shm_size: '2g'
+    ports:
+      - '7900'
+    environment:
+      - SE_EVENT_BUS_HOST=selenium-hub
+      - SE_EVENT_BUS_PUBLISH_PORT=4442
+      - SE_EVENT_BUS_SUBSCRIBE_PORT=4443
+    networks:
+      - grid_internal
+
+  selenium-firefox-node:
+    image: selenium/node-firefox:120.0
+    privileged: true
+    depends_on:
+      - selenium-hub
+    shm_size: '2g'
+    ports:
+      - '7901'
+    environment:
+      - SE_EVENT_BUS_HOST=selenium-hub
+      - SE_EVENT_BUS_PUBLISH_PORT=4442
+      - SE_EVENT_BUS_SUBSCRIBE_PORT=4443
+    networks:
+      - grid_internal
+
+  selenium-edge-node:
+    image: selenium/node-edge:120.0
+    privileged: true
+    depends_on:
+      - selenium-hub
+    shm_size: '2g'
+    ports:
+      - '7902'
+    environment:
+      - SE_EVENT_BUS_HOST=selenium-hub
+      - SE_EVENT_BUS_PUBLISH_PORT=4442
+      - SE_EVENT_BUS_SUBSCRIBE_PORT=4443
+    networks:
+      - grid_internal
+
+networks:
+  grid_internal:

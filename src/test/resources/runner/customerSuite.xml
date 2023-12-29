@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Customer Suite">
+
+    <listeners>
+        <listener class-name="com.nostromo.listeners.CustomListener"/>
+    </listeners>
+
+    <test name="Add Customer Test">
+        <classes>
+            <class name="com.nostromo.suite.customer.testcases.AddCustomerTest" />
+        </classes>
+    </test> <!-- Test -->
+
+    <test name="Open Account Test">
+        <classes>
+            <class name="com.nostromo.suite.customer.testcases.OpenAccountTest" />
+        </classes>
+    </test> <!-- Test -->
+
+</suite> <!--
+Suite -->
