@@ -54,7 +54,7 @@ public class TestBase {
     public void setUp() throws IOException {
 
         Date d = new Date();
-        String reportName = "Spark_" + d.toString().replace(":", "_").replace(" ", "_")+".html";
+        String reportName = "Spark_" + d.toString().replace(":", "_").replace(" ", "_").replace("+", "_") + ".html";
         sparkReporter = new ExtentSparkReporter("reports/" + reportName);
 
         // extent reporter setup
